@@ -76,3 +76,49 @@ Tensor tensor_b is:tensor([[1., 2.],
         [3., 4.],
         [5., 6.]])
 ```
+### 变量（Variable）
+variable是神经网络计算图中的特有的概念，Variable提供了自动求导的功能<br>
+variable的三个重要组成属性：data grad grad_fn<br>
+data存储variable的tensor数值<br>
+grad_fn表示如何得到这个variable的，如加减乘除法等
+grad表示这个Variable反向传播梯度
+
+```
+# Create Variable
+from torch.autograd import Variable#导入Variable
+
+#创建三个变量 都是一维的
+x = Variable(torch.Tensor([1]), requires_grad=True)
+w = Variable(torch.Tensor([2]), requires_grad=True)
+b = Variablr(torch.Tensor([3]), requires_grad=True)
+
+#构建计算图
+y = w*x+b
+
+#计算梯度
+y.backward()
+print(x.grad)
+print(w.grad)
+print(b.grad)
+
+out:
+tensor([2.])
+tensor([1.])
+tensor([1.])
+```
+note:当我们构建Variable时，需要传入参数requires_grad=True ，这个参数表示是否对该变量进行求导，默认值为False<br>
+y.backward()即自动对所有的参数进行自动求导。等价于y.backward(torch.FloatTensor([1])),对于标量而言，里面的参数可以省略不写，对于向量而言，里面必须写参数。
+
+```
+#矩阵求导
+x = Variable(torch.randn(3),requires_grad=True)
+y = x*2
+print(y)
+y.backward(torch.FloatTensor([1,1,1]))
+print(x.grad)
+
+out:
+tensor([ 0.6738, -2.6373,  0.4540], grad_fn=<MulBackward>)
+tensor([2., 2., 2.])
+```
+note:backward里面的参数值表示各个分量的梯度的权重
