@@ -11,3 +11,24 @@ a is:tensor([[2., 3.],
         [4., 8.],
         [7., 9.]])
 ```
+note:torch.Tensor默认的就是torch.FloatTensor
+* 创建全为0的空Tensor或者取一个正态分布作为随机初始值
+```
+a = torch.zeros((3,2))
+print('zero Tensor:{}'.format(a))
+
+out:
+zero Tensor:tensor([[0., 0.],
+        [0., 0.],
+        [0., 0.]])
+        
+b = torch.randn((3,2))
+print('normal randon is:{}'.format(b))
+
+out:
+normal randon is:tensor([[ 0.1332, -2.1152],
+        [ 0.3776,  0.2737],
+        [-1.5427, -0.4175]])
+```
+
+note:torch.zeros((3,2))和torch.randn((3,2))中参数是一个tuple，表示创建的矩阵的维度的大小
