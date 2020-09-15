@@ -1,0 +1,10 @@
+# Conv2d
+`Torch.nn.Conv2d(in_channels，out_channels，kernel_size，stride=1，padding=0，dilation=1，groups=1，bias=True)`
+
+in_channels：输入维度
+out_channels：输出维度
+kernel_size：卷积核大小
+stride：步长大小
+padding：补0
+dilation：kernel间距
+
